@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Easy Steps to Write to TTGO Watch Using WIFI</title>
+</head>
+<body>
+
+<h2>Step 1: SSH into Ubuntu server    </h3>
+<img src="ssh.png" alt="Shell">
+<p>Open the command terminal on your machine. Once have the terminal open, you can SSH into your ubunutu machine with the line of code above though you must change the IP Address to match your server. </p>
+
+<h2>Step 2: Cd in the folder AME394Fall2019</h3>
+<img src="cdintocloud.png" alt="Cloud">  
+<p></p>
+
+<h2>Step 3: Run server: node server.js</h3>
+<img src="nodeserver.png" alt="Node">  
+<p></p>
+
+<h2>Step 4: Specify IP Address in Arduino</h3>
+<img src="URLArd.png" alt="URL">  
+<p> Once the server is listening, you can switch to the Arduino code and change the IP Address to the one where your server runs on. We're listening on port 3000 so make sure to include :3000 at the end of the IP Address.  </p>
+
+<h2>Step 5: Type your IP Address into the web browser</h3>
+<img src="client-index.png" alt="Client">  
+<p>	A client will appear where you can submit values</p>
+
+<h2>Step 6: Get the values </h3>
+<img src="client-getvalu.png" alt="GetVal">  
+<p>To get the values that are typed into the client then we must visit  http://3.19.75.77:3000/getValue</p>
+
+<h2>Step 7: Code the watch to print the values</h3>
+<img src="drawstring.png" alt="Print">  
+<p>	Make sure you also include the watch library information</p>
+
+<h2>Step 8: Done! </h3>
+ 
+<p>	You should now be able to see information from the client write on the watch</p>
+
+
+
+
+</body>
+</html>
