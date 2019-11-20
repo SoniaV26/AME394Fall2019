@@ -26,20 +26,19 @@ app.get("/getValue", function (req, res) {
 
 app.get("/getAverage", function (req, res) { // edit this for A6
   var ts = parseInt(req.query.ts);
-  var begin = ts;
-  var end = ts;
+  var begin = new Date(ts);
+  var end = new Date(ts);
 
      var begin = new Date()
      begin.setHours(0)
      begin.setMinutes(0)
      begin.setSeconds(0)
-     begin.getTime()
+    
 
      var end = new Date()
-     end.setHours(0)
-     end.setMinutes(0)
-     end.setMinutes(0)
-     end.getTime()
+     end.setHours(23)
+     end.setMinutes(59)
+     end.setMinutes(59)
 
 
 	db.collection("data").find({ts:{$lte:end.getTime()}, ts:{$gt:begin.getTime()}}).toArray(function(err, result){
@@ -52,8 +51,8 @@ app.get("/getAverage", function (req, res) { // edit this for A6
       t.avg += result.length[i].t;
       h.avg += result.length.h;
     }
-    t.avg/result.length;
-    h.avg/result.length;
+    t.avg = t.avg/result.length;
+    h.avg = h.avg/result.length;
 
     
     res.send(JSON.stringify(avg));
