@@ -21,8 +21,8 @@ function getTSInFormat(t)
 	return x.getFullYear() + "-" + (x.getMonth()+1) + "-" + x.getDate() + "T" + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
 }
 function getDataFromServer(){
-  var from = new Date(document.getElementById("dateTimeSelect").value).getTime();
-  var to = new Date(to-duration);
+  var from = new Date(to-duration);
+  var to = new Date(document.getElementById("dateTimeSelect").value).getTime();
   var duration = new Date(document.getElementById("duration").value*60000);
 	var url = "./getData?from=" + from.getTime() +"&to=" + to;
 	var callback = function(data){
