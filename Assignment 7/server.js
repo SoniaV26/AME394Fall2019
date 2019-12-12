@@ -11,36 +11,25 @@ var VALUEh = 0;
 var VALUEtime = 0;
 
 
-var db = MS.db("mongodb://localhost:27017/sensorData")
-app.get("/getAverage", function (req, res) { // edit this for A6
-  var ts = parseInt(req.query.ts);
-  var begin = new Date(ts);
-  var end = new Date(ts);
+var db = MS.db("mongodb://18.222.68.162:27017/sensorData")
+app.get("/", function (req, res) {
+    res.redirect("/index.html");
+});
 
-     var begin = new Date()
-     begin.setHours(0)
-     begin.setMinutes(0)
-     begin.setSeconds(0)
-    
-
-     var end = new Date()
-     end.setHours(23)
-     end.setMinutes(59)
-     end.setMinutes(59)
-
-
-	db.collection("data").find({ts:{$lte:end.getTime()}, ts:{$gt:begin.getTime()}}).toArray(function(err, result){
-    var avg = { // calculate from result
-     t: 0,
-     h: 0
-    }
-    //forloop
-    for(i=0;i<result.length();i++){
-      t.avg += result.length[i].t;
-      h.avg += result.length.h;
-    }
-    t.avg = t.avg/result.length;
-    h.avg = h.avg/result.length;
+app.get("/getAverage", function (req, res) {
+  var from = parseInt(req.query.from);
+  var to = parseInt(req.query.to);
+  db.collection("data").find({time:{$gt:from, $lt:to}}).toArray(function(err, result){
+  	console.log(err);
+  	console.log(result);
+  	var tempSum = 0;
+  	var humSum = 0;
+  	for(var i=0; i< result.length; i++){
+  		tempSum += result[i].t || 0;
+  		humSum += result[i].t || 0;
+  	}
+  	var tAvg = tempSum/result.length;
+  	var hAvg = humSum/result.length;
   	res.send(tAvg + " "+  hAvg);
   });
 });
@@ -54,7 +43,8 @@ app.get("/getLatest", function (req, res) {
 app.get("/getData", function (req, res) {
   var from = parseInt(req.query.from);
   var to = parseInt(req.query.to);
-  db.collection("data").find({time:{$gt:from, $lt:to}}).sort({time:-1}).toArray(function(err, result){
+  db.collection("data").find({ts:{$gt:from, $lt:to}}).sort({time:-1}).toArray(function(err, result){
+    console.log(result);
     res.send(JSON.stringify(result));
   });
 });
